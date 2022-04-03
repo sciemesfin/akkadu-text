@@ -1,0 +1,5 @@
+.DS_Store
+node_modules/
+**/nuxt-chat/node_modules/
+**/chat-api/node_modules/
+**/nuxt-chat/.nuxt
