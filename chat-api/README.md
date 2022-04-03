@@ -1,7 +1,4 @@
 # Node-real-time chat
-![](/views.png)
-
-## Documentation
 
 
 ```
