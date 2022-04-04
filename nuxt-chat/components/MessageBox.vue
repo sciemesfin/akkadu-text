@@ -38,12 +38,12 @@ export default {
   methods: {
     async send() {
       //Emit message to the server
-
       await this.socket.emit("createMessage", {
         ...this.meta,
         message: this.message,
         date: new Date(),
       });
+      this.message = "";
     },
   },
 };

@@ -57,12 +57,14 @@ export default {
     room() {
       return this.$store.state.room;
     },
+    rooms() {
+      return this.$store.state.rooms;
+    },
   },
   data() {
     return {
       senderName: this.$store.state.senderName,
       closeOnContentClick: true,
-      rooms: ["Room 1", "Room 2", "Room 3"],
       users: ["John", "David", "Michael", "Solomon"],
     };
   },

@@ -1,8 +1,9 @@
 export const state = () => ({
-    drawer: false,
+    drawer: true,
     receivers: ["John", "Michael"],
-    senderName: "Mesfin",
-    room: "Room 1"
+    senderName: "",
+    room: "Chat Room 1",
+    rooms: ["Chat Room 1", "Chat Room 2", "Chat Room 3"]
 })
 export const mutations = {
     openDrawer: (state) => state.drawer = !state.drawer,

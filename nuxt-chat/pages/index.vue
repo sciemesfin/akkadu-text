@@ -1,38 +1,22 @@
 <template>
-  <v-main>
-    <v-container>
-      <v-card flat height="100%" style="margin-bottom: 100px">
-        <v-card-title>Messages</v-card-title>
-        <v-card-text>
-          <v-list>
-            <v-list-item
-              three-line
-              style="max-width: 300px; border-radius: 30px"
-              v-for="(item, i) in messages"
-              :key="i"
-              class="my-3"
-              :class="
-                sender == item.sender
-                  ? 'success lighten-4 ml-auto align-content-end'
-                  : 'primary lighten-4 mr-auto align-content-start'
-              "
-            >
-              <v-list-item-content>
-                <v-list-item-title>{{ item.sender }} </v-list-item-title>
-                <v-list-item-subtitle>
-                  {{ item.message }}
-                </v-list-item-subtitle>
-                <v-list-item-subtitle>
-                  <small>{{ new Date(item.date).toLocaleString() }} </small>
-                </v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list>
-        </v-card-text>
-      </v-card>
-    </v-container>
-    <message-box />
-  </v-main>
+  <div style="height: 100%">
+    <v-layout style="height: 100%" row wrap align-center justify-center pa-2>
+      <v-flex xs12 md3 pa-2>
+        <v-card>
+          <v-card-text>
+            <v-text-field
+              v-model="username"
+              label="User name"
+              @keyup.enter="setUsername"
+            />
+            <div>
+              <v-btn class="primary" @click="setUsername">Continue</v-btn>
+            </div>
+          </v-card-text>
+        </v-card>
+      </v-flex>
+    </v-layout>
+  </div>
 </template>
 
 <script>
@@ -40,13 +24,10 @@ import MessageBox from "../components/MessageBox.vue";
 export default {
   components: { MessageBox },
   name: "chat",
+  layout: "default",
   data() {
     return {
-      messages: [],
-      drawer: false,
-      username: "mesfin",
-      rooms: ["Room 1", "Room 2", "Room 3"],
-      users: ["John", "David", "Michael", "Solomon"],
+      username: "",
     };
   },
   computed: {
@@ -55,12 +36,13 @@ export default {
     },
   },
   mounted() {
-    this.socket = this.$nuxtSocket({
-      channel: "/",
-    });
-    this.socket.on("message", (msg, cb) => {
-      this.messages.push(msg);
-    });
+    if (this.sender !== "") this.$router.push("/chat");
+  },
+  methods: {
+    setUsername() {
+      this.$store.commit("setSender", this.username);
+      this.$router.push("/chat");
+    },
   },
 };
 </script>
